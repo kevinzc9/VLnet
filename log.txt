@@ -1,0 +1,35 @@
+1.python train_DINet_frame.py --augment_num=32 --mouth_region_size=64 --batch_size=24 --result_path=./asserts/training_model_weight/frame_training_64
+2.python train_DINet_frame.py --augment_num=100 --mouth_region_size=128 --batch_size=12 --coarse2fine --coarse_model_path=./asserts/training_model_weight/frame_training_64/netG_model_epoch_2.pth --result_path=./asserts/training_model_weight/frame_training_128
+3.python train_DINet_frame.py --augment_num=20 --mouth_region_size=256 --batch_size=4 --coarse2fine --coarse_model_path=./asserts/training_model_weight/frame_training_128/netG_model_epoch_2.pth --result_path=./asserts/training_model_weight/frame_training_256
+4.python train_DINet_clip.py --augment_num=3 --mouth_region_size=256 --batch_size=3 --pretrained_syncnet_path=./asserts/syncnet_256mouth.pth --pretrained_frame_DINet_path=./asserts/training_model_weight/frame_training_256/netG_model_epoch_2.pth --result_path=./asserts/training_model_weight/clip_training_256
+
+lab1:标准（至少第一轮训练感知损失要降到2以下）
+===> Epoch[10](53/54):  Loss_DI: 0.2409 Loss_GI: 0.3107 Loss_perception: 5.1662 lr_g = 0.0001000
+经过250个epoch 感知损失约在2.1震荡
+
+lab2:增加sameblock层(*)
+===> Epoch[10](53/54):  Loss_DI: 0.2437 Loss_GI: 0.2785 Loss_perception: 4.9137 lr_g = 0.0001000
+略微提升
+lab3:多头注意力机制(x)
+===> Epoch[10](53/54):  Loss_DI: 0.0351 Loss_GI: 0.9604 Loss_perception: 12.5918 lr_g = 0.0001000
+生成器loss抖动太明显，且降不下去Loss_perception
+lab4:fusion_transformer融合音频和图像特征(*) 增加sameblock层(*)
+===> Epoch[10](53/54):  Loss_DI: 0.2566 Loss_GI: 0.2876 Loss_perception: 5.8424 lr_g = 0.0001000
+lab5:fusion_transformer融合音频和图像特征(*) 增加sameblock层(x) 
+===> Epoch[10](53/54):  Loss_DI: 0.2324 Loss_GI: 0.3072 Loss_perception: 5.6162 lr_g = 0.0001000
+lab6:fusion_transformer融合音频和图像特征(*) 增加sameblock层(x) 更改audio_encoder
+===> Epoch[10](52/54):  Loss_DI: 0.2335 Loss_GI: 0.2752 Loss_perception: 5.9955 lr_g = 0.0001000
+lab7:fusion_transformer融合音频和图像特征(*) 增加sameblock层(x) 整体替换声音特征提取器
+===> Epoch[10](51/54):  Loss_DI: 0.2182 Loss_GI: 0.2960 Loss_perception: 6.0406 lr_g = 0.0001000
+lab8:fusion_transformer融合音频和图像特征(*) 增加sameblock层(x) audioattnet(*)
+===> Epoch[10](53/54):  Loss_DI: 0.2218 Loss_GI: 0.3176 Loss_perception: 5.8693 lr_g = 0.0001000
+lab9:fusion_transformer融合音频和图像特征(*) 增加sameblock层(*) audioattnet(*)
+===> Epoch[10](53/54):  Loss_DI: 0.2367 Loss_GI: 0.2888 Loss_perception: 5.8047 lr_g = 0.0001000
+lab10:Hybird_transformer序列融合(*) 增加sameblock层(*) audioattnet(*) adaAT(*)
+===> Epoch[10](53/54):  Loss_DI: 0.2422 Loss_GI: 0.2519 Loss_perception: 5.5368 lr_g = 0.0001000
+lab11 Hybird_transformer序列融合(*) 增加sameblock层(*) adaAT(x)
+===> Epoch[10](52/54):  Loss_DI: 0.2454 Loss_GI: 0.2749 Loss_perception: 4.9195 lr_g = 0.0001000
+*lab12 Hybird_transformer序列融合(*) 增加sameblock层(*) adaAT(*) 两种特征融合方式融合(*)
+经过400个epoch 感知损失约在2.2左右收敛
+
+s2:1ZUOYOU

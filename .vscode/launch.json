@@ -1,0 +1,21 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "Python 调试程序: 包含参数的当前文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": "--augment_num=32 --mouth_region_size=64 --batch_size=24 --result_path=./asserts/training_model_weight/frame_training_64"
+            // "args": "--augment_num=100 --mouth_region_size=128 --batch_size=8 --coarse2fine --coarse_model_path="/home/liubw/test/virtual_human/DINet_optimized/asserts/training_model_weight/frame_training_64/netG_model18_epoch_400_Loss_DI\:0.2268_Loss_GI\:0.2909_Loss_perception\:1.6627.pth --result_path="/home/liubw/test/virtual_human/DINet_optimized/asserts/training_model_weight/frame_training_128""
+            // "args": "--augment_num=3 --mouth_region_size=256 --batch_size=1 --pretrained_syncnet_path=./asserts/syncnet_256mouth.pth --pretrained_frame_DINet_path=./asserts/training_model_weight/frame_training_256/netG_model_epoch_2.pth --result_path=./asserts/training_model_weight/clip_training_256"
+            // "args" : "--mouth_region_size=256 --source_video_path=./old_asserts/examples/test1.mp4 --source_openface_landmark_path=./old_asserts/examples/test1.csv --driving_audio_path=./old_asserts/examples/driving_audio_1.wav --pretrained_clip_DINet_path=./asserts/training_model_weight/stage3.pth"
+            // "args":"--mouth_region_size=256 --source_video_path=./asserts/examples/test1.mp4 --source_openface_landmark_path=./asserts/examples/test1.csv --driving_audio_path=./asserts/examples/driving_audio_1.wav --pretrained_clip_DINet_path=./asserts/training_model_weight/frame_training_64/netG_model_epoch_400_Loss_DI:0.2313_Loss_GI:0.2949_Loss_perception:1.6940.pth"
+        }
+    ]
+}
